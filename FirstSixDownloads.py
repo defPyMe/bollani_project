@@ -9,7 +9,6 @@ def Form_completion(driver, choosing_month, input_month):
     #setting the date only the first time 
     DateSetting(driver,  "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]", input_month, 0)
     #ITEM COUNT + TAG AND SORT - date has already been set in the previous module
-    
     FillingForm(driver, "Shipment", "B2C", "NAP", "filter[Mo_vista_sn][F34][select]", 
                 "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", 
                 "filter[Mo_vista_sn][F21][from]", "filter[Mo_vista_sn][F75][select]",
