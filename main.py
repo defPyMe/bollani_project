@@ -37,12 +37,8 @@ def interface_start():
               """)  
       
         choice = input("To see program schema press 1 to launch press 2     ")
-    
-    
-    
-    
-    
     else:
+
         #choosing the month we want to download , months later than teh current ok only for the previous years 
         # asking for specific input , checking if the format is respected , removing posssiblel empty pieces placed there 
         choosing_month = input("""Please select the month to be downloaded, entering the following format with numeric values --> example : August 2022  ==  08-2022        """).strip()
@@ -50,7 +46,21 @@ def interface_start():
         years = [str(i) for i in range(1990, today.year)]
         while choosing_month[0:2] not in months and choosing_month[2:] not in years:
             choosing_month = input("""Please note that the input is invalid please mind the format that should be used, that is enter a date format with numeric values --> example : August 2022  ==  8-2022       """).strip()
-        print("input ok")
+        #now that i have the time horizon i can get the credentials
+        username = input("insert your username    ")
+        password = pwinput.pwinput("insert your password    ")
+        #asking now if the program wnats to be launched headless or not 
+        headless_choice = input("to run headless (hiding the website) press 1, else press 2     ")
+        if headless_choice == "1":
+            
+            options = webdriver.ChromeOptions()
+            options.add_argument('--headless=new')
+            driver = webdriver.Chrome(options=options)
+        else:
+            driver = webdriver.Chrome()
+        driver.get("https://stockager-dc4.warehouse.ynap.biz/")
+        #now i can access dc4 interface
+        accessing_DC4('Serial Number', driver, username, password)
             
             
             
