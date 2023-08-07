@@ -4,17 +4,21 @@ from FormManipulation import FillingForm, CleaningForm
 
 
 #thuis needs to go back every time to the previous screen 
-def Form_completion(driver, choosing_month):
+def Form_completion(driver, choosing_month, input_month):
     #all the different downloads 
     #setting the date only the first time 
-    DateSetting(driver,  "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]", flag_month, 0)
-    #OUTBOUND UNITS B2C
-    
+    DateSetting(driver,  "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]", input_month, 0)
+    #ITEM COUNT + TAG AND SORT - date has already been set in the previous module
     
     FillingForm(driver, "Shipment", "B2C", "NAP", "filter[Mo_vista_sn][F34][select]", 
                 "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", 
                 "filter[Mo_vista_sn][F21][from]", "filter[Mo_vista_sn][F75][select]",
                 "filter[Mo_vista_sn][F75][from]")
+    #need to clean the date as well in case we need to add the hour 
+    
+    
+    
+    
     CleaningForm(driver,"filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]", "filter[Mo_vista_sn][F75][select]", "filter[Mo_vista_sn][F75][from]")
     FillingForm(driver, "Shipment", "B2C", "MRP", "filter[Mo_vista_sn][F34][select]", 
                 "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", 

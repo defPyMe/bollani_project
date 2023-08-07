@@ -81,7 +81,7 @@ def interface_start():
         accessing_DC4('Serial Number', driver, username, password)
         #first three downloads where we have to clean the form as we have thre downloads
         #we choose the month and then the date is based off off the kind of download we are making
-        Form_completion(driver, choosing_month)
+        Form_completion(driver, choosing_month, choosing_month)
             
             
             
