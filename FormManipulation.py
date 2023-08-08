@@ -73,7 +73,7 @@ def FillingForm(*args):
     
 #NOT SURE HERE IT IS WORKING CORRECTLY 
 #HOW DO I ACCESS THE SECOND LIST?     
-    #using a filter for opening or not teh advanced filter so that i can add all teh values to teh first dictionary 
+    #using a filter for opening or not the advanced filter so that i can add all teh values to teh first dictionary 
     if args_[2] == 0:
             #not doing anything here so as to write the looking for applying filter only once 
         pass
@@ -90,7 +90,9 @@ def FillingForm(*args):
         #how do we get the different elemets 
         
         possible_options = ["Equal to", "Different from", "Select, Equal to", "Different from", "Greater than", "Greater or equal to", "Less than", "Less than or equal to", "Between", "Not between"
-                            ,"In list" 	,"Not in list" 	,"Begins with" ,"Not starting with" ,"Contains" ,"Does not contain" ,"Ends with" ,"Non ending with" ,"Empty" ,"Not empty"]
+                            ,"In list" 	,"Not in list" 	,"Begins with" ,"Not starting with" ,"Contains" ,"Does not contain" ,"Ends with" ,"Non ending with" ,"Empty" ,"Not empty", "Select", "Inbound", 
+                            "Inventory" ,"Picking" ,"Refilling" ,"Reload" ,"Change Classification","Correction","Shipment","Putaway","Movement","Check Serial Numbers"
+                            ,"Sorting","UT Load","Unload UT","Deliver in Work Area","Discharge from Work Operation","Change Stock To Order","Recoding"]
         #the differences are that the selet by text re aklways the same or at least predictable 
         #so if teh value of teh key is in the checklist then we 
         if args_[1][i] in possible_options:
