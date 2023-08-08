@@ -1,9 +1,7 @@
 
-def multiple_args(**kwargs):
-    args_ = kwargs
-    print(type(args_))
-    for i in args_:
-        print(args_[i])
+def multiple_args(*args):
+    args_ = args
+    #the first is a dict
+    print(type(args_[1]))
      
-     
-multiple_args( f =1, d = 2,g= ["d", "d"], l = 4, m= "e", fffff = "ww")
+multiple_args("driver", {"mm" : "dd", "ss": 3, "rty": 32})

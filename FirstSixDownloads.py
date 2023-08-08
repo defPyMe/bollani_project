@@ -12,11 +12,12 @@ def Form_completion(driver, choosing_month, input_month):
     #BOOKING IN 
     # should keep thing sin order here having the elements names and teh values to be inserted there 
     #first i get the elements then i insert the values
-    FillingForm(connection = driver, movement_type = "filter[Mo_vista_sn][F34][select]", movement_type_options = "filter[Mo_vista_sn][F34][from]", 
-                flow_type =  "filter[Mo_vista_sn][F21][select]", flow_type_options =  "filter[Mo_vista_sn][F21][from]", movement_type_value = "Putaway", flow_value = "PO")
+    # some things are the added aas a dictionary as we are isolating the options, teh second dictionary is used for teh values to be pushed
+    FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": 'Equal to', "filter[Mo_vista_sn][F21][select]" : 'Equal to'}, 
+                { "filter[Mo_vista_sn][F21][from]":'Equal to'})
+    
     #cleaning the form , has kwargs here as well as there are differences to be considered
-    CleaningForm(connection = driver, movement_type ="filter[Mo_vista_sn][F34][select]", movement_type_options = "filter[Mo_vista_sn][F34][from]", flow_type =  "filter[Mo_vista_sn][F21][select]",
-                 flow_type_options = "filter[Mo_vista_sn][F21][from]")
+    CleaningForm(driver, ["filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]"])
     
     
     
