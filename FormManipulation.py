@@ -18,9 +18,9 @@ from isolating_writing import isolating_and_writing
 
 
 
-def CleaningForm(*args):
+def CleaningForm(**kwargs):
     #assigning the args to a variable to be accessed , driver always the first
-    args_ = args
+    args_ = kwargs
     #getting the case where we have the three direct downloads
     if len(args_)==7:
         #isolating the elements with the progressive args 
@@ -65,9 +65,9 @@ driver, type_, flow, division, calendar_movement_type_input,
 """
 
 
-def FillingForm(*args):
+def FillingForm(**kwargs):
     #driver is teh first
-    args_ = args
+    args_ = kwargs
     #isolating tipo movimento
     calendar_movement_type = args_[0].find_element(By.NAME,args_[1])#calendar_movement_type_input
     select = Select(calendar_movement_type)

@@ -32,6 +32,7 @@ def accessing_DC4(page, driver, user, passw):
     time.sleep(2)
     #working up until now
     time.sleep(3)
+    #accesing monitoraggi here 
     Monitoraggi = driver.find_element(By.LINK_TEXT, 'Monitoring').click()
     time.sleep(2)
     Serial_number = driver.find_element(By.LINK_TEXT, page).click()

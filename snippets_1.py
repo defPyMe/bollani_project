@@ -1,8 +1,9 @@
 
-def multiple_args(*args):
-    args_ = args
-    return args_
+def multiple_args(**kwargs):
+    args_ = kwargs
+    print(type(args_))
+    for i in args_:
+        print(args_[i])
      
      
-d = multiple_args(1,2,["d", "d"], 4)
-print(d[1])
+multiple_args( f =1, d = 2,g= ["d", "d"], l = 4, m= "e", fffff = "ww")
