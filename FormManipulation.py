@@ -74,18 +74,16 @@ def FillingForm(*args):
 #NOT SURE HERE IT IS WORKING CORRECTLY 
 #HOW DO I ACCESS THE SECOND LIST?     
     #using a filter for opening or not teh advanced filter so that i can add all teh values to teh first dictionary 
-    if args_[3] == 0:
+    if args_[2] == 0:
             #not doing anything here so as to write the looking for applying filter only once 
         pass
     else:    
             #the only one that i am using is for the monitor serial number
-        advanced_filter = args_[0].find_element_by_xpath("//input[@value='Advanced filter']").click()
+        advanced_filter = args_[0].find_elemen(By.XPATH, "//input[@value='Advanced filter']").click()
         #shouldn t need too much sleep there 
         time.sleep(2)
         #now i add teh valuesi have inside the list 
         
-            
-    
     
     for i in args_[1]:
         # NEEDS TO SEE IF IT ACTUALLY WORKS OR NOT WHEN NEW PAGE IS OPEN -- ADDED IN THE FIRST LIST 
@@ -115,15 +113,19 @@ def FillingForm(*args):
         #then just filter it out 
         filter_button = args_[0].find_element(By.NAME, "applyFilter").click()
         time.sleep(45)
-        
+        #flag number 4 is the one where we decideif teh value is to be islated on the page or if we have to download a file
         if args_[4] == 0:
             #then we isolate the value in the page 
+            isolating_and_writing(args_[0],args_[3])
             pass
         else:
             
             #here we download directly and apply a certain processing
             #args five is teh flag we use to get the type of processing we need, it is a flag present in all instances that end up here 
             
+            #download_file
+            #look for file
+            #process_file(file, processing_code)
             
             
             
@@ -137,7 +139,10 @@ def FillingForm(*args):
 #passing in what we are calculating a sthe argument number 3 in args_
         print(f"Filling in form  for {args_[3]}")
 #last flag to ee if we need to download a file opr not 
-        isolating_and_writing(args_[0],args_[7], args_[8],  args_[9])#type_, flow, division
+
+
+
+        #isolating_and_writing(args_[0],args_[7], args_[8],  args_[9])#type_, flow, division
     pass
 
 

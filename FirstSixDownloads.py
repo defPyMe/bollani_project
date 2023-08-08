@@ -12,9 +12,9 @@ def Form_completion(driver, choosing_month, input_month):
     #BOOKING IN 
     # should keep thing sin order here having the elements names and teh values to be inserted there 
     #first i get the elements then i insert the values
-    # some things are the added aas a dictionary as we are isolating the options, teh second dictionary is used for teh values to be pushed
-    FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": 'Equal to', "filter[Mo_vista_sn][F21][select]" : 'Equal to'}, 
-                { "filter[Mo_vista_sn][F21][from]":'Equal to'}, 0, "BOOKING IN")
+    #AS I HAVE ADDED A FILTER THEN I CAN ADD EVERYTHING TO TEH SINGLE LIST  
+    FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": 'Equal to', 
+                         "filter[Mo_vista_sn][F21][select]" : 'Equal to', "filter[Mo_vista_sn][F21][from]":'Equal to'}, 0, "BOOKING IN", 0)
     
     #cleaning the form , has kwargs here as well as there are differences to be considered
     CleaningForm(driver, ["filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]"])
@@ -23,7 +23,7 @@ def Form_completion(driver, choosing_month, input_month):
     
     
     
-    
+    """
     
     
     
@@ -104,3 +104,6 @@ def Form_completion(driver, choosing_month, input_month):
     CleaningForm(driver,"filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]", "filter[Mo_vista_sn][F75][select]", "filter[Mo_vista_sn][F75][from]")
     #OTHER OUTBOUND
     print("all downloaded")
+    
+    
+    """

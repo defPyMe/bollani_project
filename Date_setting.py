@@ -20,7 +20,7 @@ def DateSetting(driver, type_name, first_date_name, second_date_name, input_mont
         #adding the two cases with the start and end of the date , the output has to be returned as string 
         #first day ok with time and date 
         first_day = date_obj.replace(day=1, hour=0, minute=0, second=0, microsecond=0).strftime("%d-%m-%Y %H:%M:%S")
-        last_day =  date_obj.replace(day=days_count, hour=0, minute=0, second=0, microsecond=0).strftime("%d-%m-%Y %H:%M:%S")
+        last_day =  date_obj.replace(day=days_count, hour=23, minute=59, second=59, microsecond=59).strftime("%d-%m-%Y %H:%M:%S")
         #extracting the date as date only 
     else:
         first_day = date_obj.strftime("%d-%m-%Y")
