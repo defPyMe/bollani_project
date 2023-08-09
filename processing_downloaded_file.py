@@ -1,5 +1,11 @@
 import pandas as pd
 
+
+
+
+#it might be a good idea to create a dictionary with the results and the so that i can receive back something with a label to write to the file
+#each conditions returns a dictionary type of response so that we can iterate through the keys when needed 
+
 def processing_file(filename, processing_flag):
 #the processing flag is the name of the type of data we are looking for --> args_[3]
 #regardless of the imported file it needs to be written
@@ -9,7 +15,9 @@ def processing_file(filename, processing_flag):
         df['Locat. To Iso'] = df['Locat. To'].str.slice(stop=3)
         totalquantitysum_SERIALNUMBERGOH = (df.loc[(df['Locat. To Iso'] == "GOH"), 'Serial Number']).count()
         totalquantitysum_SERIALNUMBERSOVSHM = ((df.loc[(df['Locat. To Iso'] == "SOV"), 'Serial Number']).count()) + ((df.loc[(df['Locat. To Iso'] == "SHM"), 'Serial Number']).count())
-        result = (totalquantitysum_SERIALNUMBERGOH, totalquantitysum_SERIALNUMBERSOVSHM)  
+        
+        result = {"totalquantitysum_SERIALNUMBERGOH" :totalquantitysum_SERIALNUMBERGOH , "totalquantitysum_SERIALNUMBERSOVSHM"  : totalquantitysum_SERIALNUMBERSOVSHM }  
+        
     elif processing_flag == "PICKING":
         df['Locat. To Iso'] = df['Locat. From'].str.slice(stop=3)
         x = [ "B2BJIT", "B2BREP", "B2C", "BULK", "EXTREP", "FAULTY", "JVJIT", "RECODE", "RESHIP", "RTV", "SAMP_E", "SAMP_I"]
@@ -30,8 +38,12 @@ def processing_file(filename, processing_flag):
         total_GOH_B2BREPL = result_GOH[1]
         pick_HZ = sum(result_SHM)
         pick_OVS = sum(result_SOV)
-    elif processing_flag == "PRE PICK":
         
+        result = {"result_GOH":result_GOH,  "result_SFA":result_SFA, " result_SHM": result_SHM , 
+                  "result_SHV":result_SHV ,  "result_SOV,":result_SOV, "total_GOH_minus_B2BREP":total_GOH_minus_B2BREP,
+                 " total_GOH_B2BREPL": total_GOH_B2BREPL, "pick_HZ":pick_HZ, "pick_OVS":pick_OVS  }
+        
+    elif processing_flag == "PRE PICK":
         
 
         x =["NOIMB" , "O27a (was sign. but used basic instead)", "O28a (was sign. but used basic instead)", "O28b (was sign. but used basic instead)" ,
@@ -60,17 +72,24 @@ def processing_file(filename, processing_flag):
         
         #B2C cartons management
         B2CcartonManagement = B2Ccartonpreparation + B2Ccartonoversize 
-
+        
+        result = { "result_GOH":result_GOH, "prepick":prepick,  "B2Ccartonpreparation":B2Ccartonpreparation,
+                  "B2CcartonSignature":B2CcartonSignature, "B2Ccartonoversize":B2Ccartonoversize, 
+                  "B2CpickandPack":B2CpickandPack,  "B2CcartonManagement":B2CcartonManagement }
 
     elif processing_flag == "PRE PICK":
         #B2B JIT+Repl
-        result = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'Total Qty']).sum()])
+        B2BJITRepl = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'Total Qty']).sum()])
         #B2B cartons management
-        result1 = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'US']).count()])
+        B2Bcartonsmanagemen = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'US']).count()])
         #Pick&pack RTV
-        result2 = (df.loc[(df['Flow'] == "RTV"), "Total Qty"]).sum()
+        PickpackRTV = (df.loc[(df['Flow'] == "RTV"), "Total Qty"]).sum()
         #Pick&pack Sample ext
-        result3 = (df.loc[(df['Flow'] == "SAMPLE ESTERNO"), "Total Qty"]).sum()
+        PickpackSampleext = (df.loc[(df['Flow'] == "SAMPLE ESTERNO"), "Total Qty"]).sum()
+        
+        result = {"B2BJITRepl":B2BJITRepl, "B2Bcartonsmanagemen":B2Bcartonsmanagemen,
+                  "PickpackRTV":PickpackRTV, "PickpackSampleext":PickpackSampleext  }
+        
 
         
     
