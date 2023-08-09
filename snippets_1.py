@@ -5,42 +5,21 @@
 
 import pandas as pd
 
-df = pd.read_excel(r"C:\Users\cavazzinil\OneDrive - YOOX NET-A-PORTER GROUP\Desktop\export20230809135303.xlsx")
+df = pd.read_excel(r"C:\Users\cavazzinil\OneDrive - YOOX NET-A-PORTER GROUP\Desktop\export20230809170038.xlsx")
 #GOING TO THE NEW COLUMN THAT IS LOCAT FROM 
 #yellow spaces to be kept if we wnat to index correctly
-x =["NOIMB" , "O27a (was sign. but used basic instead)", "O28a (was sign. but used basic instead)", "O28b (was sign. but used basic instead)" ,
-                     "Outer MRP size 15", "Outer MRP size 27a", "Outer MRP size 28a", "Outer MRP size 28b"]
 
-#isolating only the right boxes 
-y = [i for i in range(4,100)]
-
-result_GOH = sum([(df.loc[(df['Package type'] == i), 'Total Qty']).sum() for i in x])
-
-#prepick ok 
-prepick = sum([(df.loc[(df['Total Qty'] == i), 'Total Qty']).sum() for i in y])
-
-#B2C CARTON PREPARATION
-B2Ccartonpreparation = df["US"].count()
+#B2B JIT+Repl
+result = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'Total Qty']).sum()])
+#B2B cartons management
+result1 = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'US']).count()])
+#Pick&pack RTV
+result2 = (df.loc[(df['Flow'] == "RTV"), "Total Qty"]).sum()
+#Pick&pack Sample ext
+result3 = (df.loc[(df['Flow'] == "SAMPLE ESTERNO"), "Total Qty"]).sum()
 
 
-B2CcartonSignature = df.loc[(df['Box Type'] == "Signature"), 'US'].count()
-
-
-B2Ccartonoversize = sum([(df.loc[(df['Package type'] == i), 'US']).count() for i in x])
-
-
-B2CpickandPack = df["Total Qty"].sum()
-
-B2CcartonManagement = B2Ccartonpreparation + B2Ccartonoversize 
-
-
-
-
-
-
-
-
-
+print(result3)
 #slicing the column to obtain the first three
 """
 totalquantitysum_SERIALNUMBERGOH= (df.loc[(df['Locat. To Iso'] == "GOH"), 'Serial Number']).count()

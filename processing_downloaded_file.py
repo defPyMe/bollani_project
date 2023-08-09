@@ -62,7 +62,16 @@ def processing_file(filename, processing_flag):
         B2CcartonManagement = B2Ccartonpreparation + B2Ccartonoversize 
 
 
-        pass
+    elif processing_flag == "PRE PICK":
+        #B2B JIT+Repl
+        result = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'Total Qty']).sum()])
+        #B2B cartons management
+        result1 = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'US']).count()])
+        #Pick&pack RTV
+        result2 = (df.loc[(df['Flow'] == "RTV"), "Total Qty"]).sum()
+        #Pick&pack Sample ext
+        result3 = (df.loc[(df['Flow'] == "SAMPLE ESTERNO"), "Total Qty"]).sum()
+
         
     
     
