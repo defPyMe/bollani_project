@@ -1,7 +1,11 @@
+from datetime import datetime
 
-def multiple_args(*args):
-    args_ = args
-    #the first is a dict
-    print(type(args_[1]))
-     
-multiple_args("driver", {"mm" : "dd", "ss": 3, "rty": 32})
+
+#getting at least the same hour
+def get_current_date_time():
+    t=datetime.now()
+    dt_string = t.strftime("%Y/%m/%d %H:%M:%S")
+    t_corrected = (str(dt_string).replace("/", "").replace(" ", "").replace(":", ""))[0:11]
+    return t_corrected
+
+print(get_current_date_time())

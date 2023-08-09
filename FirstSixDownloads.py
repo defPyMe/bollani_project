@@ -16,6 +16,7 @@ def Form_completion(driver, choosing_month, input_month):
     
     
     #[2] --> advanced filtering, [4] --> 0 on the same page, 1 to download.
+    #[5] -- it is  teh css selector to download teh different documents 
     
     
     
@@ -56,7 +57,28 @@ def Form_completion(driver, choosing_month, input_month):
                           "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]"])
     
     
+    #PICK SAMPLE INT 
+    DateSetting(driver,  "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]", input_month, 1)
+    FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": 'Picking', 
+                         "filter[Mo_vista_sn][F21][select]" : 'Equal to', "filter[Mo_vista_sn][F21][from]":'SAMP_I', "filter[Mo_vista_sn][F75][select]" : "Select"}, 0, "PICK SAMPLE INT", 0)
     
+    #cleaning the form , has kwargs here as well as there are differences to be considered
+    CleaningForm(driver, ["filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]", 
+                          "filter[Mo_vista_sn][F31][select]", "filter[Mo_vista_sn][F31][from]", "filter[Mo_vista_sn][F31][to]", "filter[Mo_vista_sn][F75][select]", "filter[Mo_vista_sn][F75][from]"])
+    
+    
+    
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
     
     """

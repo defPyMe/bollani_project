@@ -3,8 +3,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from isolating_writing import isolating_and_writing
-
-
+from countdown import countdown
+#imorting download functtion
+from download import download_excel
+#getting the file
+from GetFile import file_name
 
 #no need for webdrivers as i insert in a module where i am already conected
 #do i need here the elements to use for the isolation of the values 
@@ -108,15 +111,20 @@ def FillingForm(*args):
             #here it goes in the second dictionary 
             looped_element.send_keys(args_[1][i])#flow)
             pass
-        #HERE I ACCESS THE ADVANCED OPTIONS AND THE PRESS THE APPLY FILTER
+        
+        
+        
+        
 
 
 
         #then just filter it out 
         filter_button = args_[0].find_element(By.NAME, "applyFilter").click()
-        time.sleep(45)
+        #usually enough to download teh file correctly 
+        countdown(45)
+        
         #flag number 4 is the one where we decideif teh value is to be islated on the page or if we have to download a file
-        if args_[4] == 0:
+        if args_[4] == 1:
             #then we isolate the value in the page 
             isolating_and_writing(args_[0],args_[3])
             pass
@@ -125,13 +133,29 @@ def FillingForm(*args):
             #here we download directly and apply a certain processing
             #args five is teh flag we use to get the type of processing we need, it is a flag present in all instances that end up here 
             
+            
+            
+            
             #download_file
-            #look for file
-            #process_file(file, processing_code)
+            #since i am dowwloading always an excel file i will have to isolatre always the same element 
+            download_excel(args_[0], args_[5])
+            #waiting for teh download to take effect
+            countdown(300)
+            #look for file, similar to the function already used but it also erases the file
+            if file_name() != "":
+                #if the filename is not empty we found the file 
+                
+                    #process_file(file, processing_code)
+                    
+                    pass
+                
+            
+      
+          
             
             
             
-            pass
+            
         
 #ISOLATING AND WRITING HERE GETS DIFFERENT VALUES BASED ON THE CASE WE ARE IN
 #SO I NEED TO MAKE THIS GENERAL OR RETURNING A SINGLE VALUE WITH TEH FUNCTIONS 
