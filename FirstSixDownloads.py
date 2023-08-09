@@ -24,7 +24,7 @@ def Form_completion(driver, choosing_month, input_month):
     
     
     FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": "Putaway" , 
-                         "filter[Mo_vista_sn][F21][select]" : 'Equal to', "filter[Mo_vista_sn][F21][from]":'PO'}, 0, "BOOKING IN", 0)
+                         "filter[Mo_vista_sn][F21][select]" : 'Equal to', "filter[Mo_vista_sn][F21][from]":'PO'}, 0, "BOOKING IN", 0, 'a[href*="Mo_vista_sn"][href*="export=xls/exportEnt=Mo_vista_sn"]')
     
     #cleaning the form , has kwargs here as well as there are differences to be considered
     CleaningForm(driver, ["filter[Mo_vista_sn][F34][select]", "filter[Mo_vista_sn][F34][from]", "filter[Mo_vista_sn][F21][select]", "filter[Mo_vista_sn][F21][from]", 

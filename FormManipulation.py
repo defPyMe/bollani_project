@@ -144,7 +144,6 @@ def FillingForm(*args):
             #look for file, similar to the function already used but it also erases the file
             if file_name() != "":
                 #if the filename is not empty we found the file 
-                
                     #process_file(file, processing_code)
                     
                     pass

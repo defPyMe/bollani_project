@@ -45,3 +45,7 @@ def file_name():
         return location + '\\' + chosen_file
     except:
         print("Downloaded file to be processed not found")
+
+#needs o remove the file so thet the other downloaded files do not interact 
+def removeFile(filename):
+    os.remove(filename)
