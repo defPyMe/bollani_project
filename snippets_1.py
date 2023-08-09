@@ -5,30 +5,42 @@
 
 import pandas as pd
 
-df = pd.read_excel(r"C:\Users\cavazzinil\Downloads\export20230809113645.xlsx")
+df = pd.read_excel(r"C:\Users\cavazzinil\OneDrive - YOOX NET-A-PORTER GROUP\Desktop\export20230809135303.xlsx")
 #GOING TO THE NEW COLUMN THAT IS LOCAT FROM 
-df['Locat. To Iso'] = df['Locat. From'].str.slice(stop=3)
-x = [ "B2BJIT", "B2BREP", "B2C", "BULK", "EXTREP", "FAULTY", "JVJIT", "RECODE", "RESHIP", "RTV", "SAMP_E", "SAMP_I"]
-#EXTRACTING ALL values for each line 
-#GOH
-result_GOH = [(df.loc[(df['Locat. To Iso'] == "GOH") & (df['Flow'] == i), 'Serial Number']).count() for i in x]
-#SFA
-result_SFA = [(df.loc[(df['Locat. To Iso'] == "SFA") & (df['Flow'] == i), 'Serial Number']).count() for i in x]
-#SHM
-result_SHM = [(df.loc[(df['Locat. To Iso'] == "SHM") & (df['Flow'] == i), 'Serial Number']).count() for i in x]
-#SHV 
-result_SHV = [(df.loc[(df['Locat. To Iso'] == "SHV") & (df['Flow'] == i), 'Serial Number']).count() for i in x]
-#SOV
-result_SOV = [(df.loc[(df['Locat. To Iso'] == "SOV") & (df['Flow'] == i), 'Serial Number']).count() for i in x]
-#performing the actual calculations
-print(result_GOH, result_GOH[1])
-total_GOH_minus_B2BREP = sum(result_GOH) - result_GOH[1]
-total_GOH_B2BREPL = result_GOH[1]
-pick_HZ = sum(result_SHM)
-pick_OVS = sum((result_SOV)
+#yellow spaces to be kept if we wnat to index correctly
+x =["NOIMB" , "O27a (was sign. but used basic instead)", "O28a (was sign. but used basic instead)", "O28b (was sign. but used basic instead)" ,
+                     "Outer MRP size 15", "Outer MRP size 27a", "Outer MRP size 28a", "Outer MRP size 28b"]
+
+#isolating only the right boxes 
+y = [i for i in range(4,100)]
+
+result_GOH = sum([(df.loc[(df['Package type'] == i), 'Total Qty']).sum() for i in x])
+
+#prepick ok 
+prepick = sum([(df.loc[(df['Total Qty'] == i), 'Total Qty']).sum() for i in y])
+
+#B2C CARTON PREPARATION
+B2Ccartonpreparation = df["US"].count()
 
 
-print(total_GOH_minus_B2BREP)
+B2CcartonSignature = df.loc[(df['Box Type'] == "Signature"), 'US'].count()
+
+
+B2Ccartonoversize = sum([(df.loc[(df['Package type'] == i), 'US']).count() for i in x])
+
+
+B2CpickandPack = df["Total Qty"].sum()
+
+B2CcartonManagement = B2Ccartonpreparation + B2Ccartonoversize 
+
+
+
+
+
+
+
+
+
 #slicing the column to obtain the first three
 """
 totalquantitysum_SERIALNUMBERGOH= (df.loc[(df['Locat. To Iso'] == "GOH"), 'Serial Number']).count()

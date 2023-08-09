@@ -32,6 +32,36 @@ def processing_file(filename, processing_flag):
         pick_OVS = sum(result_SOV)
     elif processing_flag == "PRE PICK":
         
+        
+
+        x =["NOIMB" , "O27a (was sign. but used basic instead)", "O28a (was sign. but used basic instead)", "O28b (was sign. but used basic instead)" ,
+                     "Outer MRP size 15", "Outer MRP size 27a", "Outer MRP size 28a", "Outer MRP size 28b"]
+
+        #isolating only the right boxes 
+        y = [i for i in range(4,100)]
+
+        #B2C pick&pack OS
+        result_GOH = sum([(df.loc[(df['Package type'] == i), 'Total Qty']).sum() for i in x])
+
+        #Pre-pick
+        prepick = sum([(df.loc[(df['Total Qty'] == i), 'Total Qty']).sum() for i in y])
+
+        #B2C carton preparation (basic)
+        B2Ccartonpreparation = df["US"].count()
+
+        #B2C carton preparation (signature)
+        B2CcartonSignature = df.loc[(df['Box Type'] == "Signature"), 'US'].count()
+
+        #B2C carton preparation (oversize)
+        B2Ccartonoversize = sum([(df.loc[(df['Package type'] == i), 'US']).count() for i in x])
+
+        #B2C pick&pack
+        B2CpickandPack = df["Total Qty"].sum()
+        
+        #B2C cartons management
+        B2CcartonManagement = B2Ccartonpreparation + B2Ccartonoversize 
+
+
         pass
         
     
