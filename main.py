@@ -35,6 +35,10 @@ def interface_start():
     while choice == "1":
         #choosing to launch the documentation
         print("""
+              
+              
+DOCUMENTATION :
+
 
             main.py : lets the user choose month and year to extract the data, collects the username and password, lets the user choose the type of launch that is headless or not
             
@@ -60,16 +64,41 @@ def interface_start():
             either in the terminal if launched from the editor or inside the console when packed into an application. useful to get an idea of when the script will be finished 
             running
            
+            download.py : just a small function that isolates the element to press to download teh file based off of tehe argument css_selector that is
+            passed to it. in the form manipulation script we call this only when we need to download the excel file (args_[4] == 1 no download,
+            args_[4] == 0 file to download) 
             
+            GetFile.py : 5 different functions here. All directed to getting the file that was just downloaded (looks for it in the user's download folder). 3 functions are part of the functioning 
+            of the fourth (file_name uses get_download_path, get_current_date_time, find_file_by_name). they isolate the file with the given string input
+            that is the day and hour of download up until the hours. (narrows the search). The mother function file_name returns the full path of the chosen file.
+           
+                - removeFile : deletes the file after the processing to avoid congestion in the Downloads folder and possible errors when others are downloaded.  
+
+            processing_downloaded_file.py : it is used only for those cases in which we download a file so in the form completion file when the args_[4] flag is equal to 
+            0. Then we differentiate based of the possible names of the analyzed download, to differentiate between the cases that require
+            the downloading of the file (the name is stored in the args passed to the fillingform function in args_[3]).
+            In all the cases we return adictonary with the possible results that we can iterate over when writing to the file , using the key to get what we are downloading
+            and the value for teh value we are looking for.
+            
+
            
            
            
-           
-           
-           
-           
-           
-            FormManipulation.py : 
+            FormManipulation.py : two functions, one to fill in the form online and the other to clean the form to get the info out of teh chosen
+            function. both the two functions takle different arguments with teh *args function. 
+            - FillingForm : called for each one of the downloads as they need different requirements. the arguments they are called with can vary in number based 
+            on the different requirements, but they are generally the same up until the flag args_[4] that tells us if the file is to be downloaded or not. 
+            there can be an added parameter where we have to download the file as we need to isolate the address of the download button
+            - CleaningForm :  takes args here as well as we do not know how many of teh fields were actually filled in
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             FirstSixDownloads.py : imports three 
             
@@ -80,26 +109,7 @@ def interface_start():
             
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-              
-              
-              
-            
-              
-              
-              
-              
+
             
               
               """)  

@@ -22,7 +22,6 @@ def isolating_and_writing(driver, name_attribute):
         # Line that goes back to the form to be filled in - maybe it shouldn t stay here but ok
         image = driver.find_element(By.XPATH, "//td[@class='title']/img")
         image.click()
-        
         print(f"writing to file - {name_attribute} - written correctly")
         time.sleep(3)
     except:

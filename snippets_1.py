@@ -1,4 +1,2 @@
-s = "a"
-for i in range(10000):
-    s = s + "a"
-print(s)
+s = "PRO0004526706"
+print(len(s))
