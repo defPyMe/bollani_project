@@ -77,7 +77,7 @@ def processing_file(filename, processing_flag):
                   "B2CcartonSignature":B2CcartonSignature, "B2Ccartonoversize":B2Ccartonoversize, 
                   "B2CpickandPack":B2CpickandPack,  "B2CcartonManagement":B2CcartonManagement }
 
-    elif processing_flag == "PRE PICK":
+    elif processing_flag == "B2B JIT REPL":
         #B2B JIT+Repl
         B2BJITRepl = sum([(df.loc[(df['Flow'] == "B2B JIT") | (df['Flow'] == "B2B REPL"), 'Total Qty']).sum()])
         #B2B cartons management
@@ -90,6 +90,7 @@ def processing_file(filename, processing_flag):
         result = {"B2BJITRepl":B2BJITRepl, "B2Bcartonsmanagemen":B2Bcartonsmanagemen,
                   "PickpackRTV":PickpackRTV, "PickpackSampleext":PickpackSampleext  }
     #spitting back the result , iterating over the keys to isolate the result once the function has been called
+    #the flag i can isolate in the main script
     return result
 
         

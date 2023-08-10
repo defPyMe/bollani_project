@@ -39,3 +39,8 @@ def accessing_DC4(page, driver, user, passw):
     time.sleep(10)
     print("accessed DC4")
     
+#needed because the last two downloads are in a different pageì
+def accessing_US(driver, page):
+    Serial_number = driver.find_element(By.LINK_TEXT, page).click()
+    time.sleep(5)
+    

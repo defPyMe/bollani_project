@@ -42,7 +42,8 @@ DOCUMENTATION :
 
             main.py : lets the user choose month and year to extract the data, collects the username and password, lets the user choose the type of launch that is headless or not
             
-            accessing_DC4.py :  accesses the main page of Stockager and goes directly to the monitoring section
+            accessing_DC4.py :  accesses the main page of Stockager and goes directly to the monitoring section. Added a section where the US page is accessed as it is needed for
+            the last two downloads 
             
             DateSetting.py : sets the date for the field of the movement date. Takes different arguments and finally sends the date values to the intended fields
             
@@ -81,35 +82,17 @@ DOCUMENTATION :
             and the value for teh value we are looking for.
             
 
-           
-           
-           
             FormManipulation.py : two functions, one to fill in the form online and the other to clean the form to get the info out of teh chosen
             function. both the two functions takle different arguments with teh *args function. 
-            - FillingForm : called for each one of the downloads as they need different requirements. the arguments they are called with can vary in number based 
-            on the different requirements, but they are generally the same up until the flag args_[4] that tells us if the file is to be downloaded or not. 
-            there can be an added parameter where we have to download the file as we need to isolate the address of the download button
-            - CleaningForm :  takes args here as well as we do not know how many of teh fields were actually filled in
+                - FillingForm : called for each one of the downloads as they need different requirements. the arguments they are called with can vary in number based 
+                  on the different requirements, but they are generally the same up until the flag args_[4] that tells us if the file is to be downloaded or not. 
+                  there can be an added parameter where we have to download the file as we need to isolate the address of the download button
+                - CleaningForm :  takes args here as well as we do not know how many of teh fields were actually filled in
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            FirstSixDownloads.py : imports three 
-            
-            
-            
-            
-            
-            
-            
-            
-
+            FirstSixDownloads.py : imports the datesetting to get the difference based on if we have the date or not.
+            Then the filling form is called with different number of arguments. Then we clean the form calling the cleaningForm function with as arguments mainly the names of the
+            elements we want to empty along with the driver
             
               
               """)  
