@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 import time
 import os
+import datetime
 
 download = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
 
@@ -18,8 +19,7 @@ def isolating_and_writing(driver, name_attribute):
             f.write( name_attribute,   record[0] )
             f.write("\n")
         
-
-        
+        # Line that goes back to the form to be filled in - maybe it shouldn t stay here but ok
         image = driver.find_element(By.XPATH, "//td[@class='title']/img")
         image.click()
         
@@ -56,20 +56,13 @@ def writing_processed_values(result_dict):
 
 #adding here the current date and the selected month to teh output file (top of it )
 def adding_timestamp(current_date, chosen_month):
+    #as the format is a string i should isolate the values from the input string
+    date_obj = datetime.strptime(chosen_month, "%m-%Y")
     #merely opening the file and appending teh urrent date and teh selected month that is calculated in main.py 
     with open (download + "\\output.txt","a", encoding="utf-8") as f:
         f.write("\n")
-        f.write("Extracting data on " + str(current_date) + " , for " + str(chosen_month) )
+        f.write("Extracting data on " + str(current_date) + " , for " + str(date_obj) )
         f.write("\n")
     print("Added timestamp")
     pass
 
-
-def adding_timestamp_week(current_date, week_num):
-    #merely opening the file and appending teh urrent date and teh selected month that is calculated in main.py 
-    with open (download + "\\output.txt","a", encoding="utf-8") as f:
-        f.write("\n")
-        f.write("Extracting data on " + str(current_date) + " , for week number  " + str(week_num) )
-        f.write("\n")
-    print("Added timestamp")
-    pass

@@ -7,7 +7,7 @@ from countdown import countdown
 #imorting download functtion
 from download import download_excel
 #getting the file
-from GetFile import file_name
+from GetFile import file_name, removeFile
 #importing the processed function
 from processing_downloaded_file import processing_file
 
@@ -112,12 +112,6 @@ def FillingForm(*args):
             #here it goes in the second dictionary 
             looped_element.send_keys(args_[1][i])#flow)
             pass
-        
-        
-        
-        
-
-
 
         #then just filter it out 
         filter_button = args_[0].find_element(By.NAME, "applyFilter").click()
@@ -151,6 +145,8 @@ def FillingForm(*args):
                     processed = processing_file(found, args_[3])
                     #writing to file now, should be the same for all cases 
                     isolating_and_writing(args_[0], processed)
+                    #deleting the file 
+                    removeFile(found)
             else:
                 print("file not found for the downloading of -->  ", args_[3])
                 

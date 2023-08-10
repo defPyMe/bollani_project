@@ -10,7 +10,8 @@ import dateutil.relativedelta
 from Accessing import accessing_DC4
 #importing the form completion function
 from FirstSixDownloads import Form_completion
-
+#importing timestamp function
+from isolating_writing import adding_timestamp
 
 
 #NBOT SURE THIS HERE MAKES SENSE
@@ -35,16 +36,66 @@ def interface_start():
         #choosing to launch the documentation
         print("""
 
-            \   __________    /         NOTHING HERE
-             \  | O   0   |  /          BUT DESOLATION!!
-              \ |   ()    | /
-               \|         |/
+            main.py : lets the user choose month and year to extract the data, collects the username and password, lets the user choose the type of launch that is headless or not
+            
+            accessing_DC4.py :  accesses the main page of Stockager and goes directly to the monitoring section
+            
+            DateSetting.py : sets the date for the field of the movement date. Takes different arguments and finally sends the date values to the intended fields
+            
+                - driver 
+                - name of the : choosing interval, first date field, second date field in the page monitoring
+                - input_month in the format inserted by the user ex : "08-2023" and turns it into a date
+                - flag that sets if teh inserted date wioll have the hour inserted or just the date (1 hours, 0 date-only)
+            
+            isolating_writing.py :  it has three main functions here 
+
+                - adding_timestamp : takes the current_date and chosen_month as argumnets. The current_date is used for
+                  getting the date of the extraction. The chosen month gets us teh detail of the period the extraction refers to.
+                  it has the same line of code in datesetting that processes the input to get the date
+                - isolating_and_writing : isolates the value in the page when we are looking for the small value on top
+                  near the Record string. isolates the record witha  list comprehension and then brings back to tehe form to be filled in
+                - writing_processed_values : writes the values that are returned by the dicts after the file has been processed
+                
+            countdown.py : small script with just one function that takes an integer as argument and prints a small conter in
+            either in the terminal if launched from the editor or inside the console when packed into an application. useful to get an idea of when the script will be finished 
+            running
+           
+            
+           
+           
+           
+           
+           
+           
+           
+           
+            FormManipulation.py : 
+            
+            FirstSixDownloads.py : imports three 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
               
-              the values we get are collected in an excel fiel where we can easily check them with the invoice
               
               
-              
-              
+            
               
               
               
@@ -64,6 +115,10 @@ def interface_start():
         years = [str(i) for i in range(1990, today.year)]
         while choosing_month[0:2] not in months and choosing_month[2:] not in years:
             choosing_month = input("""Please note that the input is invalid please mind the format that should be used, that is enter a date format with numeric values --> example : August 2022  ==  8-2022       """).strip()
+        #as the month matches the input i can add teh timestamp 
+        adding_timestamp(today, choosing_month)
+        
+        
         #now that i have the time horizon i can get the credentials
         username = input("insert your username    ")
         password = pwinput.pwinput("insert your password    ")
