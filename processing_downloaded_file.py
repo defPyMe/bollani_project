@@ -89,7 +89,8 @@ def processing_file(filename, processing_flag):
         
         result = {"B2BJITRepl":B2BJITRepl, "B2Bcartonsmanagemen":B2Bcartonsmanagemen,
                   "PickpackRTV":PickpackRTV, "PickpackSampleext":PickpackSampleext  }
-        
+    #spitting back the result , iterating over the keys to isolate the result once the function has been called
+    return result
 
         
     

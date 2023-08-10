@@ -8,6 +8,8 @@ from countdown import countdown
 from download import download_excel
 #getting the file
 from GetFile import file_name
+#importing the processed function
+from processing_downloaded_file import processing_file
 
 #no need for webdrivers as i insert in a module where i am already conected
 #do i need here the elements to use for the isolation of the values 
@@ -72,7 +74,6 @@ def FillingForm(*args):
     args_ = args
     #need to do it in a loop because there are different lenghts in the inputs 
     #accessing the elements in the elements list
-    
     
 #NOT SURE HERE IT IS WORKING CORRECTLY 
 #HOW DO I ACCESS THE SECOND LIST?     
@@ -142,11 +143,16 @@ def FillingForm(*args):
             #waiting for teh download to take effect
             countdown(300)
             #look for file, similar to the function already used but it also erases the file
-            if file_name() != "":
+            found = file_name()
+            if found != "":
                 #if the filename is not empty we found the file 
                     #process_file(file, processing_code)
-                    
-                    pass
+                    #args_3 as the processing flag with teh name of what we are downloading, assigning it to an obj as it is the 
+                    processed = processing_file(found, args_[3])
+                    #writing to file now, should be the same for all cases 
+                    isolating_and_writing(args_[0], processed)
+            else:
+                print("file not found for the downloading of -->  ", args_[3])
                 
             
       
