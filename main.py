@@ -12,7 +12,14 @@ from Accessing import accessing_DC4
 from FirstSixDownloads import Form_completion
 #importing timestamp function
 from isolating_writing import adding_timestamp
+#import os to try and color teh terminal output
+import os
+from termcolor import colored
 
+#importing trying to correct timeout error
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+#os.system('color')
 
 #NBOT SURE THIS HERE MAKES SENSE
 
@@ -34,11 +41,24 @@ def interface_start():
     choice = input("To see program schema press 1 to launch press 2      ")
     while choice == "1":
         #choosing to launch the documentation
-        print("""
+        print('''
               
               
 DOCUMENTATION :
 
+''')
+        
+        print(colored('''
+
+ SSSSS  TTTTT    OOOO    CCCC   K    K      A        GGGGGG     EEEEEE   RRRR 
+(         T     O    O   C      K  K       A A     G            EE       R   R
+ SSSSS    T     O    O   C      KKK       AAAAA   G             EEEEE    RRR 
+      )   T     O    O   C      K  K     A     A   G      GGG   EE       R   R2
+ SSSSS    T      OOOO    CCCC   K    K  A       A    GGGGG      EEEEEE   R    R
+                     
+''', 'red')     )               
+            
+        print("""
 
             main.py : lets the user choose month and year to extract the data, collects the username and password, lets the user choose the type of launch that is headless or not
             
@@ -47,7 +67,7 @@ DOCUMENTATION :
             
             DateSetting.py : sets the date for the field of the movement date. Takes different arguments and finally sends the date values to the intended fields
             
-                - driver 
+                - driver
                 - name of the : choosing interval, first date field, second date field in the page monitoring
                 - input_month in the format inserted by the user ex : "08-2023" and turns it into a date
                 - flag that sets if teh inserted date wioll have the hour inserted or just the date (1 hours, 0 date-only)
@@ -103,11 +123,11 @@ DOCUMENTATION :
         #choosing the month we want to download , months later than teh current ok only for the previous years 
         # asking for specific input , checking if the format is respected , removing posssiblel empty pieces placed there 
         choosing_month = input("""Please select the month to be downloaded, entering the following format with numeric values --> example : August 2022  ==  08-2022        """).strip()
-        months = [str(i) if len(str(i))>1 else "0"+str(i) for i in range(1,13) ]
+        months = [str(i) if len(str(i))>1 else "0"+str(i) for i in range(1,13)]
         today = datetime.now()
         years = [str(i) for i in range(1990, today.year)]
-        while choosing_month[0:2] not in months and choosing_month[2:] not in years:
-            choosing_month = input("""Please note that the input is invalid please mind the format that should be used, that is enter a date format with numeric values --> example : August 2022  ==  8-2022       """).strip()
+        while choosing_month[0:2] not in months and choosing_month[2:] not in years and len(choosing_month)!=7:
+            choosing_month = input("""Please note that the input is invalid please mind the format that should be used, that is enter a date for mat with numeric values --> example : August 2022  ==  8-2022       """).strip()
         #as the month matches the input i can add teh timestamp 
         adding_timestamp(today, choosing_month)
         
@@ -118,9 +138,12 @@ DOCUMENTATION :
         #asking now if the program wnats to be launched headless or not 
         headless_choice = input("to run headless (hiding the website) press 1, else press 2     ")
         if headless_choice == "1":
-            
             options = webdriver.ChromeOptions()
+            #adding here
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options.add_argument('disable-infobars')
             options.add_argument('--headless=new')
+            options.add_argument('--disable-gpu')
             driver = webdriver.Chrome(options=options)
         else:
             driver = webdriver.Chrome()
@@ -129,7 +152,7 @@ DOCUMENTATION :
         accessing_DC4('Serial Number', driver, username, password)
         #first three downloads where we have to clean the form as we have thre downloads
         #we choose the month and then the date is based off off the kind of download we are making
-        Form_completion(driver, choosing_month, choosing_month)
+        Form_completion(driver, choosing_month)
             
             
             

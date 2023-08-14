@@ -5,7 +5,7 @@ from selenium.webdriver.support.select import Select
 from isolating_writing import isolating_and_writing
 from countdown import countdown
 #imorting download functtion
-from download import download_excel
+#from download import download_excel
 #getting the file
 from GetFile import file_name, removeFile
 #importing the processed function
@@ -21,6 +21,13 @@ from processing_downloaded_file import processing_file
     
 """
 
+def download_excel(driver, css_selector):
+    print("css_selector", css_selector)
+    
+    image = driver.find_element(By.CSS_SELECTOR, css_selector)
+    countdown(4)
+    image.click()#'a[href*="Mo_vista_uds"][href*="export=xls/exportEnt=Mo_vista_uds"]'
+    countdown(400)
 
 #the driver is added and a list of teh fields io need to clean
 def CleaningForm(*args):
@@ -35,35 +42,13 @@ def CleaningForm(*args):
     return None
 
 
-
-
-"""
+def selecting_visible_text(key, value, possible_actions):
     
-driver, type_, flow, division, calendar_movement_type_input, 
-                calendar_movement_type_option_input,movement_type, movement_type_options , flusso_type_input, 
-                flusso_options_input,
+    pass
 
+def puashing_the_keys():
+    pass
 
-
-
-    FillingForm(connection = driver, movement_type = "filter[Mo_vista_sn][F34][select]", movement_type_options = "filter[Mo_vista_sn][F34][from]", 
-                flow_type =  "filter[Mo_vista_sn][F21][select]", flow_type_options =  "filter[Mo_vista_sn][F21][from]", movement_type_value = "Putaway", flow_value = "PO")
-
-"""
-
-
-
-
-
-"""
-possible options :     Equal to, Different from,  Select, Equal to, 	Different from, Greater than, 	Greater or equal to,  Less than,  Less than or equal to,  Between, Not between 	,In list 	,Not in list 	,Begins with 
-,Not starting with 		,Contains 			,Does not contain 		,Ends with 		,Non ending with 	,Empty 			,Not empty 	
-
-
-    # some things are the added aas a dictionary as we are isolating the options, teh second dictionary is used for teh values to be pushed
-    FillingForm(driver, {"filter[Mo_vista_sn][F34][select]" : 'Equal to',  "filter[Mo_vista_sn][F34][from]": 'Equal to', "filter[Mo_vista_sn][F21][select]" : 'Equal to'}, 
-                { "filter[Mo_vista_sn][F21][from]":'PO'}, 0, "BOOKING IN")
-    """
 
 
 
@@ -80,6 +65,7 @@ def FillingForm(*args):
     #using a filter for opening or not the advanced filter so that i can add all teh values to teh first dictionary 
     if args_[2] == 0:
             #not doing anything here so as to write the looking for applying filter only once 
+            #actions not needed
         pass
     else:    
             #the only one that i am using is for the monitor serial number
@@ -87,16 +73,18 @@ def FillingForm(*args):
         #shouldn t need too much sleep there 
         time.sleep(2)
         #now i add teh valuesi have inside the list 
-        
     
+    possible_options = ["Equal to", "Different from", "Select, Equal to", "Different from", "Greater than", "Greater or equal to", "Less than", "Less than or equal to", "Between", "Not between"
+                            ,"In list" 	,"Not in list" 	,"Begins with" ,"Not starting with" ,"Contains" ,"Does not contain" ,"Ends with" ,"Non ending with" ,"Empty" ,"Not empty", "Select", "Inbound", 
+                            "Inventory" ,"Picking" ,"Refilling" ,"Reload" ,"Change Classification","Correction","Shipment","Putaway","Movement","Check Serial Numbers"
+                            ,"Sorting","UT Load","Unload UT","Deliver in Work Area","Discharge from Work Operation","Change Stock To Order","Recoding"]        
+
     for i in args_[1]:
+        [i for i in args_[1] ]
         # NEEDS TO SEE IF IT ACTUALLY WORKS OR NOT WHEN NEW PAGE IS OPEN -- ADDED IN THE FIRST LIST 
         #how do we get the different elemets 
         
-        possible_options = ["Equal to", "Different from", "Select, Equal to", "Different from", "Greater than", "Greater or equal to", "Less than", "Less than or equal to", "Between", "Not between"
-                            ,"In list" 	,"Not in list" 	,"Begins with" ,"Not starting with" ,"Contains" ,"Does not contain" ,"Ends with" ,"Non ending with" ,"Empty" ,"Not empty", "Select", "Inbound", 
-                            "Inventory" ,"Picking" ,"Refilling" ,"Reload" ,"Change Classification","Correction","Shipment","Putaway","Movement","Check Serial Numbers"
-                            ,"Sorting","UT Load","Unload UT","Deliver in Work Area","Discharge from Work Operation","Change Stock To Order","Recoding"]
+      
         #the differences are that the selet by text re aklways the same or at least predictable 
         #so if teh value of teh key is in the checklist then we 
         if args_[1][i] in possible_options:
@@ -105,25 +93,28 @@ def FillingForm(*args):
             select = Select(looping_elements)
             # Select an option by its visible text, it is a value in the dictionary 
             #some of them have the visible text option , the others do not 
+            print("selecting", i, args_[1][i])
             select.select_by_visible_text(args_[1][i])
         else:
             looped_element= args_[0].find_element(By.NAME,i)# flusso_options_input
             #variable either bj2jit, b2b , REM 
             #here it goes in the second dictionary 
+            
+            print("pushing", i, args_[1][i])
             looped_element.send_keys(args_[1][i])#flow)
-            pass
+            
 
         #then just filter it out 
-        filter_button = args_[0].find_element(By.NAME, "applyFilter").click()
+    filter_button = args_[0].find_element(By.NAME, "applyFilter").click()
         #usually enough to download teh file correctly 
-        countdown(45)
+    countdown(45)
         
         #flag number 4 is the one where we decideif teh value is to be islated on the page or if we have to download a file
-        if args_[4] == 1:
+    if args_[4] == 1:
             #then we isolate the value in the page 
             isolating_and_writing(args_[0],args_[3])
             pass
-        else:
+    else:
             
             #here we download directly and apply a certain processing
             #args five is teh flag we use to get the type of processing we need, it is a flag present in all instances that end up here 
@@ -136,7 +127,7 @@ def FillingForm(*args):
             # as teh fourth flag is getting me here i can access also the fifth wiotout getting any errors 
             download_excel(args_[0], args_[5])
             #waiting for teh download to take effect
-            countdown(300)
+            
             #look for file, similar to the function already used but it also erases the file
             found = file_name()
             if found != "":
@@ -165,7 +156,7 @@ def FillingForm(*args):
     
 #not sure i need to print anything here... maybe that i am isolating the values for a certain value in the invoice 
 #passing in what we are calculating a sthe argument number 3 in args_
-        print(f"Filling in form  for {args_[3]}")
+    print(f"Filling in form  for {args_[3]}")
 #last flag to ee if we need to download a file opr not 
 
 
