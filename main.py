@@ -147,7 +147,7 @@ DOCUMENTATION :
             driver = webdriver.Chrome(options=options)
         else:
             driver = webdriver.Chrome()
-        driver.get("https://stockager-dc4.warehouse.ynap.biz/")
+        driver.get("")
         #now i can access dc4 interface, first getting the values that can be calculated on top 
         accessing_DC4('Serial Number', driver, username, password)
         #first three downloads where we have to clean the form as we have thre downloads
