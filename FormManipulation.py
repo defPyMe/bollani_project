@@ -14,12 +14,7 @@ from processing_downloaded_file import processing_file
 #no need for webdrivers as i insert in a module where i am already conected
 #do i need here the elements to use for the isolation of the values 
 
-"""
-    driver, calendar_movement_type_input, calendar_movement_type_option_input,
-                  flusso_type_input, flusso_options_input, division_type_input,
-                  division_options_input
-    
-"""
+
 
 def download_excel(driver, css_selector):
     print("css_selector", css_selector)
