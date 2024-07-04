@@ -6,9 +6,7 @@ from Accessing import accessing_US
 
 #thuis needs to go back every time to the previous screen 
 def Form_completion(driver, input_month):
-    #all the different downloads 
-    #the parameters here are already for the SERIAL NUMBER  view, the parameters are ok for the monitoring serial number
-    # there are three because one appears later after the between is pressed. 1 (hours) , 0 no hours in date setting 
+
     
   
     
