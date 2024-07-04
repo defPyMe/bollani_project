@@ -3,8 +3,6 @@ import pandas as pd
 
 
 
-#it might be a good idea to create a dictionary with the results and the so that i can receive back something with a label to write to the file
-#each conditions returns a dictionary type of response so that we can iterate through the keys when needed 
 
 def processing_file(filename, processing_flag):
 #the processing flag is the name of the type of data we are looking for --> args_[3]
