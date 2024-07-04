@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from countdown import countdown 
 
-#CSS SELECTOR SEEMS TO CHANGE AT A PAGE LEVEL , 
-#SO ALL THE DOWNLOADS ON TYHE SAME PAGE SHOLD HAVE THE SAME ARGUMENT 
+
 
 
 #'a[href*="Mo_vista_sn"][href*="export=xls/exportEnt=Mo_vista_sn"]'
