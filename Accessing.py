@@ -1,4 +1,5 @@
 #accesses any page in the homepage depending on the parameter page inserted in the function 
+#latest version
 import time
 
 from selenium.webdriver.common.keys import Keys
